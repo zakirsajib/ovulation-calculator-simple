@@ -1,0 +1,116 @@
+.ll-skin-melon {
+	font-size: 90%;
+}
+
+.ll-skin-melon .ui-widget {
+	font-family: "WOFF2 Juli Sans-Medium", Helvetica, Arial, Verdana, sans-serif;
+	background: #fff;
+	border: none!important;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+
+.ll-skin-melon .ui-datepicker {
+	padding: 0;
+}
+
+.ll-skin-melon .ui-datepicker-header {
+	border: none;
+	background: transparent;
+	font-weight: normal;
+	font-size: 15px;
+	padding: 0.2em 0 1em;
+}
+
+.ll-skin-melon .ui-datepicker-header .ui-state-hover {
+	background: transparent;
+	border-color: transparent;
+	cursor: pointer;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-title {
+	margin-top: .4em;
+	margin-bottom: .3em;
+	color: #544f49;
+	text-transform: uppercase;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev-hover,
+.ll-skin-melon .ui-datepicker .ui-datepicker-next-hover,
+.ll-skin-melon .ui-datepicker .ui-datepicker-next,
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev {
+	top: .9em;
+	border:none;
+	box-shadow: none;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev-hover {
+	left: 2px;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-next-hover {
+	right: 2px;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-next span,
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev span {
+	background-image: url(images/ui-icons_ffffff_256x240NEW.png);
+	background-position: -32px 0;
+	margin-top: 0;
+	top: 0;
+	font-weight: normal;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev span {
+	background-position: -96px 0;
+}
+
+.ll-skin-melon .ui-datepicker table {
+	margin: 0;
+}
+
+.ll-skin-melon .ui-datepicker tr{
+	border: 0;
+}
+
+.ll-skin-melon .ui-datepicker th {
+	padding: 1em 0;
+	color: #a8d1af;
+	font-size: 13px;
+	font-weight: normal;
+	border: none;
+	text-transform: uppercase;
+}
+
+.ll-skin-melon .ui-datepicker td {
+/* 	background: #f97e76; */
+	border: none;
+	padding: 0;
+	
+}
+
+.ll-skin-melon td .ui-state-default {
+	background: #f5f5f5;
+	text-align: center;
+	padding: .5em;
+	margin: 0;
+	font-weight: normal;
+	color: #544f49;
+	font-size: 16px;
+	box-shadow: none!important;
+}
+
+
+.ll-skin-melon .ui-state-disabled .ui-state-default {
+	color: #a3a3a3;
+}
+
+.ll-skin-melon td .ui-state-active,
+.ll-skin-melon td .ui-state-hover {
+	background-color: #848eb2;
+	color: #fff;
+}

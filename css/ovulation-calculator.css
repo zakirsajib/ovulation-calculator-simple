@@ -1,0 +1,559 @@
+@font-face { font-family: 'WOFF Juli Sans-Light'; src: url('../fonts/JuliSans-Light.woff'); }
+@font-face { font-family: 'WOFF Juli Sans-Regular'; src: url('../fonts/JuliSans-Regular.woff'); }
+@font-face { font-family: 'WOFF Juli Sans-Medium'; src: url('../fonts/JuliSans-Medium.woff'); }
+@font-face { font-family: 'WOFF Juli Sans-Bold'; src: url('../fonts/JuliSans-Bold.woff'); }
+@font-face { font-family: 'WOFF2 Juli Sans-Light'; src: url('../fonts/JuliSans-Light.woff2'); }
+@font-face { font-family: 'WOFF2 Juli Sans-Regular'; src: url('../fonts/JuliSans-Regular.woff2'); }
+@font-face { font-family: 'WOFF2 Juli Sans-Medium'; src: url('../fonts/JuliSans-Medium.woff2'); }
+@font-face { font-family: 'WOFF2 Juli Sans-Bold'; src: url('../fonts/JuliSans-Bold.woff2'); }
+@font-face { font-family: 'EOT Juli Sans-Light'; src: url('../fonts/JuliSans-Light.eot'); }
+@font-face { font-family: 'EOT Juli Sans-Regular'; src: url('../fonts/JuliSans-Regular.eot'); }
+@font-face { font-family: 'EOT Juli Sans-Medium'; src: url('../fonts/JuliSans-Medium.eot'); }
+@font-face { font-family: 'EOT Juli Sans-Bold'; src: url('../fonts/JuliSans-Bold.eot'); }
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?j9c1fg');
+  src:  url('../fonts/icomoon.eot?j9c1fg#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?j9c1fg') format('truetype'),
+    url('../fonts/icomoon.woff?j9c1fg') format('woff'),
+    url('../fonts/icomoon.svg?j9c1fg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.calculator_table{
+	font-size:12px;
+	font-family: "WOFF2 Juli Sans-Regular"; 
+	font-feature-settings: "kern" on, "liga" on, "calt" on;
+	-moz-font-feature-settings: "kern" on, "liga" on, "calt" on;
+	-webkit-font-feature-settings: "kern" on, "liga" on, "calt" on;
+	-ms-font-feature-settings: "kern" on, "liga" on, "calt" on;
+	-o-font-feature-settings: "kern" on, "liga" on, "calt" on;
+	padding: 0 0 25px;
+}
+
+#ovulationCalculatorForm{
+	background-color: #f5f5f5;
+	padding: 15px 25px 15px;
+	margin-bottom: 50px;
+}
+
+#calendar{
+	display: none;
+}
+
+.ui-datepicker{
+	width: 100%!important;
+}
+
+.oc_heading{
+	padding: 0;
+	margin-bottom: 2rem;
+}
+
+.oc_title,
+.oc_subtitle{
+	color: #9E8977;
+}
+
+.oc_title{
+	font-family: "WOFF Juli Sans-Bold"; 
+	font-size: 50px;
+	margin: 0 0 10px;
+	padding: 1.5em 0 0;
+	line-height: 1;
+}
+.oc_subtitle{
+	font-family: "WOFF2 Juli Sans-Bold"; 
+	font-size: 20px;
+	margin: 0 0 1.5em;
+	padding: 0;
+	line-height: 1.5
+}
+
+.calculator_table form,
+.calculator_table .email-box{
+	position: relative;
+}
+.calculator_table .icon-calendar2{
+	position: absolute;
+	right: 35px;
+	cursor: pointer;
+	font-size: 2.5em;
+}
+.icon-angle-right,
+.icon-calendar3,
+.icon-calendar2{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1.6;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-calendar2:before {
+  content: "\e904";
+  color: #c1c1c1;
+}
+
+.icon-calendar3:before {
+  content: "\e904";
+  color: #544f49;
+}
+
+.calculator_table .icon-angle-right{
+	position: absolute;
+	right: 35px;
+	color: #fff;
+	font-size: 4em;
+}
+
+
+.calculator_table h2,
+.calculator_table p{
+	font-family: "WOFF2 Juli Sans-Medium"; 
+	color: #9E8977;
+}
+
+.calculator_table p{
+	font-family: "WOFF2 Juli Sans-Regular";
+	font-size: 18px;
+	margin: 0 0 1.5em;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.calculator_table h2,
+.single .calculator_table h2{
+	font-size: 1.625rem;
+	line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    color: #9E8977;
+}
+
+.calculator_table input[type="text"]{
+	cursor: pointer;
+}
+
+.calculator_table input[type="email"],
+.calculator_table select,
+.calculator_table input[type="text"]{
+	font-family: "WOFF2 Juli Sans-Regular"; 
+	color: #9b9893;
+	border-radius: 5px;
+	margin-bottom: 1em;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+.calculator_table input[type="email"],
+.calculator_table input[type="text"]{
+	background: #fff;
+	border: 1px solid #ccc;
+	display: block;
+	padding: 0.7em;
+	width: 100%;
+	font-size: 1rem;
+	line-height: 1.5;
+}
+
+.calculator_table input[type="email"]{
+	font-size: 1.2rem;
+	padding: 0.5em;
+}
+
+.calculator_table select{
+	border: 1px solid #ccc;
+	height: 3em;
+	max-width: 100%;
+	width: 100%;
+}
+
+.calculator_table select:focus{
+	outline: 0;
+}
+
+.calculator_table input[type="email"]:active,
+.calculator_table input[type="email"]:focus,
+.calculator_table input[type="text"]:active,
+.calculator_table input[type="text"]:focus{
+	color: #999;
+	border-color: #ccc;
+	outline: 0;
+}
+.calculateagain,
+.calculator_table .submit-btn{
+	padding: 3rem 0 1rem;
+	text-align: center;
+}
+
+
+.calculator_table .submit-btn input[type=submit]{
+	border-radius: 5px;
+	background-color: #a8d1af;
+	background-image: none;
+	color: #fff;
+	font-family: "WOFF2 Juli Sans-Bold"; 
+	font-size: 20px;
+	padding: 0.8em 2em;
+	border: 0;
+	box-shadow: none;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 1;
+	text-shadow: none;
+}
+
+.calculator_table .submit-btn input[type=submit]:focus,
+.calculator_table .submit-btn input[type=submit]:hover{
+	background-color: #9b9893;	
+	outline: 0;
+}
+
+.calculator_table form p{
+	margin-bottom: 0.5em;
+}
+
+.email-area{
+	background-color: #e6e6e6;
+	padding: 15px 25px 5px;
+}
+
+.message-eng h2,
+.single .message-eng h2{
+	font-family: "WOFF2 Juli Sans-Medium"; 
+	font-size: 2rem;
+	margin: 0 0 1em;
+	padding: 0;
+	line-height: 2;
+}
+.message-eng p{
+	color: #544f49;
+}
+
+.subscription-option{
+    display: inline-block;
+    grid-template-columns: 1fr 1fr;
+}
+
+.subscription-option input[type="checkbox"]{
+	transition: all .3s linear;
+	margin-right: 1em;
+	-webkit-appearance: checkbox;
+}
+
+.calculateagain{
+	display: flex;
+	padding: 0.5rem 0 0;
+}
+.fertile{
+	display: flex;
+	grid-template-columns:1fr 1fr;
+	text-align: left;
+	font-family: "WOFF2 Juli Sans-Regular";
+	font-size: 16px;
+	color: #544f49;
+}
+/*
+.fertile a{
+	font-family: "WOFF2 Juli Sans-Regular";
+	text-decoration: none;
+	-webkit-box-shadow: none!important;
+	box-shadow: none!important;
+	font-size: 16px;
+	color: #544f49;
+	text-decoration: none!important;
+}
+*/
+
+.fertile a:visited{
+	color: #544f49;
+}
+
+.fertileTick{
+	fill: #41AD49;
+}
+.expected-ovulation {
+    fill: #1A9F1F;
+}
+svg.expected-ovulation,
+svg.fertileTick {
+    position: relative;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    left: auto;
+    display: inherit;
+}
+
+
+.period-indicator {
+    width: 15px;
+    background-color: #878cb4;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.calculateagain .icon-calendar3{
+	position: relative;
+	right: 0;
+	margin: 0;
+	line-height: 0;
+	font-size: 2.5em;
+}
+
+.calculateagain input[type=button]{
+	font-family: "WOFF2 Juli Sans-Regular"; 
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	color: #544f49;
+	padding: 0;
+	font-size: 16px;
+	box-shadow: none;
+	cursor: pointer;
+	display: inline-block;
+	line-height: 2;
+	text-shadow: none;
+	vertical-align: bottom;
+}
+.calculateagain input[type=button]:active,
+.calculateagain input[type=button]:focus,
+.calculateagain input[type=button]:hover{
+	background-color: transparent;
+	outline: 0;
+}
+
+.calculateagainbtn{
+	position: relative;
+	right: 20px;
+	flex: 1;
+	text-align: right;
+	cursor: pointer;
+}
+
+.subscription-option label,
+.email-box p,
+.email-message p{
+	color: #544f49;
+}
+
+.subscription-option label{
+	font-size: 14px;
+	line-height: 1.3;
+}
+
+.email-message h2,
+.email-message p{
+	margin-bottom: 0.5em;
+}
+
+.email-box p,
+.email-message p{
+	line-height: 1.2;
+}
+
+.calendar-area{
+	background-color: #f5f5f5;
+    margin-bottom: 1rem;
+    padding: 1.5rem 0.5rem 1rem;
+}
+
+.calendar-area h2,
+.calendar-area p{
+	margin-bottom: 10px;
+}
+
+.calendar-area p{
+	color: #544f49;
+}
+.ui-datepicker td a{
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.ui-state-default, .ui-widget-content .ui-state-default{
+	border: 2px solid #fff!important;
+	text-decoration: none!important;
+}
+
+.calculator_table .submit-btn input[disabled][type=submit] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+td.fertileDay a.ui-state-default:focus,
+td.periodDay a.ui-state-default:focus,
+td.fertileDay a.ui-state-default:hover,
+td.periodDay a.ui-state-default:hover{
+	box-shadow: none;
+	outline: 0;
+}
+
+
+/* Fertile Style
+------------------------------------*/
+td.fertileDay a.ui-state-default,
+td.fertileDay span.ui-state-default {
+    background-color: #96d2af;
+    color: #fff!important;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    filter:Alpha(Opacity=100);
+}
+
+.ui-priority-secondary, 
+.ui-widget-content .ui-priority-secondary{
+	opacity: 1;
+	filter:Alpha(Opacity=100);
+}
+
+/*All fertile days*/
+td.fertileDay a.ui-state-default::after{	
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 2.5;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "\e900"; /*Tick icon*/
+    position: absolute;
+    right: 3px;
+}
+/*Only ovulating day*/
+td.fertileDay-4 a.ui-state-default::after,
+td.fertileDay-10 a.ui-state-default::after{
+	content: '\e902';	/*Cirlce icon*/
+	color: #1a9f1f!important;
+}
+
+
+/* Period Style
+------------------------------------*/
+td.periodDay a.ui-state-default,
+td.periodDay span.ui-state-default {
+	background-color: #878cb4;
+	color: #fff!important;
+}
+/* End Period Style
+------------------------------------*/
+
+.mailchimpResponse,
+.emailResponse{
+	font-family: Arial, sans-serif;
+	text-align:center;
+	border-bottom:1px solid;
+	padding-bottom:1rem;
+}
+
+.mailchimpResponse{
+	border-bottom: 0;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-next span,
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev span{
+	color: #000;
+	width: 25px;
+	height: 25px;
+}
+
+.ll-skin-melon .ui-datepicker .ui-datepicker-next span{
+	background-image: url(images/next.svg);
+	background-position: right center;
+	left: 0;
+	margin-left: 0;
+}
+.ll-skin-melon .ui-datepicker .ui-datepicker-prev span{
+	background-image: url(images/prev.svg);
+	background-position: left center;
+}
+
+.ui-state-disabled, 
+.ui-widget-content .ui-state-disabled{
+	opacity: 1;	
+	filter:Alpha(Opacity=100);
+}
+
+@media screen and (max-width: 414px) {
+	.oc_title{
+		font-size: 30px;
+	}
+	
+	#ovulationCalculatorForm{
+		padding: 15px 0;
+	}
+	#ovulationCalculatorForm i.fa.fa-calendar{
+		right: 30px;
+	}
+	
+	#ovulationCalculatorForm i.fa.fa-angle-right{
+		margin-top: 80px;
+	}
+	
+	#ovulationCalculatorForm .submit-btn,
+	#ovulationCalculatorForm h2,
+	#ovulationCalculatorForm p{
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	#ovulationCalculatorForm select,
+	#ovulationCalculatorForm input[type="text"]{
+		margin-left: 15px;
+		max-width: 90%;
+	}
+	#ovulationCalculatorForm select{
+		padding-left: 10px;
+	}
+	
+	.email-area{
+		padding: 15px 15px 5px;
+	}
+	.message-eng h2, 
+	.single .message-eng h2{
+		line-height: 1;
+	}
+	
+}
+@media screen and (max-width: 320px) {
+	.calendar-area{
+		padding: 1.5rem 0 0;
+	}
+	.oc_title{
+		font-size: 28px;
+	}
+	.oc_subtitle{
+		line-height: 1.25;
+	}
+	.calculator_table p{
+		font-size: 14px;
+	}
+	.email-message h2{
+		line-height: 1.1;
+	}
+}
+
+/* clearfix short For modern browsers */
+.cf:before,
+.cf:after { content:""; display:table; }
+.cf:after { clear:both; }
+/* For IE 6/7 (trigger hasLayout) */
+.cf { zoom:1; }
