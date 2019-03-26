@@ -60,14 +60,7 @@ if (!class_exists("OvulationCalculator")){
 				.icon-calendar3:before{
 					color: <?php echo $options['oc-base-color']?>;
 				}
-				.fertile a,
-				.calculateagain input[type=button],
-				.subscription-option label, 
-				.email-box p, 
-				.email-message p,
-				.subscription-option label{
-					color: <?php echo $options['oc-email-box-text']?>;
-				}
+				
 				
 				/*Period Dates + Selected day*/
 

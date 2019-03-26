@@ -39,7 +39,15 @@ Only in Pro version. It supports 7 languages. They are Danish, Swedish, Norwegia
 
 == Screenshots ==
 
-
+1. General
+2. Calendar Translation
+3. Calendar Month Translation
+4. Calendar Days Translation
+5. Color Scheme
+6. Sidebar shortcode sample #1
+7. Sidebar shortcode sample #2
+8. Page shortcode sample #1
+9. Page shortcode sample #2
 
 == Credits ==
 https://icomoon.io/
