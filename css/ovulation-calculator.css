@@ -42,6 +42,7 @@
 
 #calendar{
 	display: none;
+	padding-bottom: 1em;
 }
 
 .ui-datepicker{
