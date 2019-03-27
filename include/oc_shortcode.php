@@ -137,22 +137,14 @@ if( !empty( $_POST['calculator_ok'] ) ):
 	$month= $dateparts[1];
 	$year= $dateparts[2];
 	
-	//echo $day;
-	//echo $month;
-	//echo $year;
-	
-	
 	//convert to time
 	$lasttime = mktime(0,0,0,$month,$day,$year);
 	
 	$selected_period_date = date("F d, Y",$lasttime);
 	
-	
 	// next period start
     $next_period = $lasttime + $_POST['days']*24*3600;
     $next_period = date("F d, Y",$next_period);
-    
-	
     
 	//first fertile day
 	if( !empty( $_POST['days'] == 20 ) ):

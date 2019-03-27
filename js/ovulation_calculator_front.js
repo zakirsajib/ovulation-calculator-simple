@@ -4,7 +4,6 @@ $(function ($) {
 	$(document).ready(function() {
 	  	$('#calendarInput, .calculator_table .icon-calendar2').click(function(){
 	  		$('#calendar').toggle();
-	  		//$('.calculator_table .icon-calendar2').css('color', '#a8d1af');
 		});
 	    
 	    $('#calculatorOk').prop('disabled',true);
