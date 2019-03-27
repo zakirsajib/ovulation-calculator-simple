@@ -2,26 +2,25 @@
 // Get option values from Database. Option Value name is : ovulationcalculator-group
 $options = get_option('ovulationcalculator-group');
 
-
-	if (!function_exists('check_available_date')):
+if (!function_exists('ovulation_calculator_check_available_date')):
 	
-	function check_available_date($firstday, $next_period, $selected_period_date){
+	function ovulation_calculator_check_available_date($firstday, $next_period, $selected_period_date){
 	
 	$keep_all_dates = array();
 	$keep_period_dates = array();
-	for($month_count = 1; $month_count<=6; $month_count++){ // 6 months result
+	for($month_count = 1; $month_count <=6; $month_count++){ // 6 months result
 		
 		$start = strtotime($firstday);
 		
 		$selected_period_d = strtotime($selected_period_date);
 		
-		$dates=array();
+		$dates = array();
 
 		$dates_period = array();
 		
-		if($_POST['days'] == 20):
+		if( !empty( $_POST['days'] == 20 ) ):
 			$count = 3;
-		elseif($_POST['days'] == 21):
+		elseif( !empty($_POST['days'] == 21 ) ):
 			$count = 4;
 		else:
 			$count = 5;
@@ -33,7 +32,7 @@ $options = get_option('ovulationcalculator-group');
 			$new_format_date = date("d/m/Y", strtotime($dates[$i]));
 		}
 		
-		$add_days = $_POST['days']-$count; // minus 5 from selected cycle 
+		$add_days = sanitize_text_field($_POST['days'])-$count; // minus 5 from selected cycle 
 		$last_fertile_day = $dates[$count];
 		$next_fertile_day = date('F d, Y',strtotime($last_fertile_day) + (24*3600*$add_days));
 		
@@ -41,31 +40,19 @@ $options = get_option('ovulationcalculator-group');
 		
 		$firstday = $next_fertile_day;
 		
-		
-		
 		// Calculate period 5 days
 		for($x = 0; $x<=4; $x++){
 			array_push($dates_period,date('F d, Y', strtotime("+$x day", $selected_period_d)));
 			$new_format_period_date = date("d/m/Y", strtotime($dates_period[$x]));
-		
 		}
-		$add_period_days = $_POST['days']-4; // minus 4 from selected cycle
+		$add_period_days = sanitize_text_field($_POST['days'])-4; // minus 4 from selected cycle
 		$last_period_day = $dates_period[4];
 		$next_period_day = date('F d, Y',strtotime($last_period_day) + (24*3600*$add_period_days));
 		
 		array_push($keep_period_dates,$dates_period);
 		
 		$selected_period_date = $next_period_day;
-	}
-	
-	
-	//var_dump(array_reduce($keep_all_dates, 'array_merge', array()));
-	
-	//$result = array_reduce($keep_all_dates, 'array_merge', array()); // fertile
-	
-	//$period_result = array_reduce($keep_period_dates, 'array_merge', array()); // periods
-	
-	
+	}	
 	
 	update_option('oc_period_result', $keep_period_dates, '', 'no');
 	update_option('oc_fertile_result', $keep_all_dates, '', 'no');
@@ -140,9 +127,9 @@ $options = get_option('ovulationcalculator-group');
 		</script>	
 <?php } endif;// Function ends here
 
-if(!empty($_POST['calculator_ok'])):
+if( !empty( $_POST['calculator_ok'] ) ):
 
-	$fulldate = $_POST['something'];
+	$fulldate = sanitize_text_field($_POST['something']);
 	
 	$dateparts = explode("/",$fulldate);
 	
@@ -156,21 +143,21 @@ if(!empty($_POST['calculator_ok'])):
 	
 	
 	//convert to time
-	$lasttime=mktime(0,0,0,$month,$day,$year);
+	$lasttime = mktime(0,0,0,$month,$day,$year);
 	
 	$selected_period_date = date("F d, Y",$lasttime);
 	
 	
 	// next period start
-    $next_period=$lasttime + $_POST['days']*24*3600;
-    $next_period=date("F d, Y",$next_period);
+    $next_period = $lasttime + $_POST['days']*24*3600;
+    $next_period = date("F d, Y",$next_period);
     
 	
     
 	//first fertile day
-	if($_POST['days'] == 20):
+	if( !empty( $_POST['days'] == 20 ) ):
 		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 15*24*3600;
-	elseif($_POST['days'] == 21):
+	elseif( !empty( $_POST['days'] == 21 ) ):
 		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 16*24*3600;
 	else:
 		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 17*24*3600;
@@ -179,22 +166,22 @@ if(!empty($_POST['calculator_ok'])):
 	$firstday = date("F d, Y",$firstdaytime);
 	
 	//last fertile day
-	$lastdaytime=$lasttime + $_POST['days']*24*3600 - 12*24*3600;
-	$lastday=date("F d, Y",$lastdaytime);
+	$lastdaytime = $lasttime + $_POST['days']*24*3600 - 12*24*3600;
+	$lastday = date("F d, Y",$lastdaytime);
 		
 	?>
 	<div class="calculator_table">
 		<div class="calendar-area">
-			<?php if(!empty($options['oc-dates'])):
+			<?php if( !empty( $options['oc-dates'] ) ):
 				printf(__('<h2>%s</h2>', 'ovulation-calculator'), $options['oc-dates']);
 			endif;
-			if(!empty($options['oc-next-month-results'])):
+			if( !empty( $options['oc-next-month-results'] ) ):
 				printf(__('<p>%s</p>', 'ovulation-calculator'), $options['oc-next-month-results']);
-			endif;?>
+			endif;
 			
-			<?php check_available_date($firstday, $next_period, $selected_period_date);?>
+			ovulation_calculator_check_available_date($firstday, $next_period, $selected_period_date);
 			
-			<?php if($_POST['days'] == 20):?>
+			if( !empty( $_POST['days'] == 20 ) ):?>
 				<style>
 					td.fertileDay-2 span::after,
 					td.fertileDay-2 a.ui-state-default::after,
@@ -207,7 +194,7 @@ if(!empty($_POST['calculator_ok'])):
 						content: "\e900";	/*Tick icon*/
 					}
 				</style>	
-			<?php elseif($_POST['days'] == 21):?>
+			<?php elseif( !empty( $_POST['days'] == 21 ) ):?>
 				<style>
 					td.fertileDay-3 span::after,
 					td.fertileDay-3 a.ui-state-default::after,
@@ -293,19 +280,19 @@ if(!empty($_POST['calculator_ok'])):
 	
 	<div class="calculator_table">
 		<form method="post" id="ovulationCalculatorForm" autocomplete="off">
-			<?php if(!empty($options['calculate-ovulation'])):
+			<?php if( !empty( $options['calculate-ovulation'] ) ):
 				printf(__('<h2>%s</h2>', 'ovulation-calculator'), $options['calculate-ovulation']);
 			endif;
-			if(!empty($options['first-day-last-period'])):
+			if( !empty( $options['first-day-last-period'] ) ):
 				printf(__('<p>%s</p>', 'ovulation-calculator'), $options['first-day-last-period']);
 			endif?>
 			<span class="icon-calendar2"></span>
-			<?php if(!empty($options['select-date'])):?>
+			<?php if( !empty( $options['select-date'] ) ):?>
 			<input type="text" name="something" placeholder="<?php printf(__('%s', 'ovulation-calculator'), $options['select-date']);?>..." id="calendarInput" readonly/>
 			<?php endif?>
 			<div id="calendar" class="ll-skin-melon"></div>
 			
-			<?php if(!empty($options['length-cycle'])):
+			<?php if( !empty($options['length-cycle'] ) ):
 				printf(__('<p>%s</p>', 'ovulation-calculator'), $options['length-cycle']);
 			endif?>
 			<select name="days">
