@@ -143,22 +143,22 @@ if( !empty( $_POST['calculator_ok'] ) ):
 	$selected_period_date = date("F d, Y",$lasttime);
 	
 	// next period start
-    $next_period = $lasttime + $_POST['days']*24*3600;
+    $next_period = $lasttime + sanitize_text_field($_POST['days'])*24*3600;
     $next_period = date("F d, Y",$next_period);
     
 	//first fertile day
 	if( !empty( $_POST['days'] == 20 ) ):
-		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 15*24*3600;
+		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 15*24*3600;
 	elseif( !empty( $_POST['days'] == 21 ) ):
-		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 16*24*3600;
+		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 16*24*3600;
 	else:
-		$firstdaytime = $lasttime + $_POST['days']*24*3600 - 17*24*3600;
+		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 17*24*3600;
 	endif;
 	
 	$firstday = date("F d, Y",$firstdaytime);
 	
 	//last fertile day
-	$lastdaytime = $lasttime + $_POST['days']*24*3600 - 12*24*3600;
+	$lastdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 12*24*3600;
 	$lastday = date("F d, Y",$lastdaytime);
 		
 	?>
