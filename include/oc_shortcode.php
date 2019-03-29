@@ -32,7 +32,7 @@ if (!function_exists('ovulation_calculator_check_available_date')):
 			$new_format_date = date("d/m/Y", strtotime($dates[$i]));
 		}
 		
-		$add_days = sanitize_text_field($_POST['days'])-$count; // minus 5 from selected cycle 
+		$add_days = intval($_POST['days'])-$count; // minus 5 from selected cycle 
 		$last_fertile_day = $dates[$count];
 		$next_fertile_day = date('F d, Y',strtotime($last_fertile_day) + (24*3600*$add_days));
 		
@@ -45,7 +45,7 @@ if (!function_exists('ovulation_calculator_check_available_date')):
 			array_push($dates_period,date('F d, Y', strtotime("+$x day", $selected_period_d)));
 			$new_format_period_date = date("d/m/Y", strtotime($dates_period[$x]));
 		}
-		$add_period_days = sanitize_text_field($_POST['days'])-4; // minus 4 from selected cycle
+		$add_period_days = intval($_POST['days'])-4; // minus 4 from selected cycle
 		$last_period_day = $dates_period[4];
 		$next_period_day = date('F d, Y',strtotime($last_period_day) + (24*3600*$add_period_days));
 		
@@ -143,22 +143,22 @@ if( !empty( $_POST['calculator_ok'] ) ):
 	$selected_period_date = date("F d, Y",$lasttime);
 	
 	// next period start
-    $next_period = $lasttime + sanitize_text_field($_POST['days'])*24*3600;
+    $next_period = $lasttime + intval($_POST['days'])*24*3600;
     $next_period = date("F d, Y",$next_period);
     
 	//first fertile day
 	if( !empty( $_POST['days'] == 20 ) ):
-		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 15*24*3600;
+		$firstdaytime = $lasttime + intval($_POST['days'])*24*3600 - 15*24*3600;
 	elseif( !empty( $_POST['days'] == 21 ) ):
-		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 16*24*3600;
+		$firstdaytime = $lasttime + intval($_POST['days'])*24*3600 - 16*24*3600;
 	else:
-		$firstdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 17*24*3600;
+		$firstdaytime = $lasttime + intval($_POST['days'])*24*3600 - 17*24*3600;
 	endif;
 	
 	$firstday = date("F d, Y",$firstdaytime);
 	
 	//last fertile day
-	$lastdaytime = $lasttime + sanitize_text_field($_POST['days'])*24*3600 - 12*24*3600;
+	$lastdaytime = $lasttime + intval($_POST['days'])*24*3600 - 12*24*3600;
 	$lastday = date("F d, Y",$lastdaytime);
 		
 	?>
