@@ -251,7 +251,7 @@ if (!class_exists("OvulationCalculator")){
 	     
 	    // Front-end Style and JS   
 	    function ovulation_calculator_enqueue(){ 
-		    wp_enqueue_style( 'oc_jquery_ui', '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css' ); 
+		    wp_enqueue_style( 'oc_jquery_ui', plugins_url( '/css/jquery-ui.css' , __FILE__ ) );
 	        wp_enqueue_style( 'oc_custom_datepicker', plugins_url( '/css/melon.datepicker.css' , __FILE__ ) );
 	        wp_enqueue_style( 'oc-main', plugins_url( '/css/ovulation-calculator.css' , __FILE__ ) );
 	        wp_enqueue_script( 'jquery-ui-datepicker' );
