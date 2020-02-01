@@ -1,60 +1,71 @@
-=== Ovulation Calculator ===
-Contributors: zakirstage
-Tags: ovulation, calculator, fertility, pregnancy
-Requires at least: 4.1
-Tested up to: 5.1.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# Ovulation Calculator
+* Contributors: zakirstage
+* Tags: ovulation
+* Requires at least: 4.1
+* Tested up to: 5.0.3
+* License: GPLv2 or later
+* License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This ovulation calculator will calculate your period, fertility and shows the next 6 months ovulation dates.
+## Description
 
-== Description ==
+This WordPress plugin ovulation calculator will calculate your most fertile days. You can use shortcode to page or post.
 
-This ovulation calculator will calculate your most fertility days. You can use shortcode to page or post or sidebar.
+## Live
+[Click here](https://babyplan.se/berakna-agglossning)
 
-== Installation ==
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-6.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-7.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-8.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-9.jpg)
+
+
+
+## Installation
 
 1. Upload the plugin directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to Ovulation Calculator section in WordPress dashboard and enter details.
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= Does the calculator have shortcode ? =
+#### Does the calculator have shortcode ?
 
-Yes. The shortcode is [ovulationcalculator]. You can use it both in post and page and even in sidebar.
+Yes. The shortcode is `[ovulationcalculator]`. You can use it both in post and page.
 
-= Does this plugin support MailChimp ? =
+#### Does this plugin support MailChimp ?
 
-Only in Pro version. You can enter your MailChimp API Key and Unique List ID in mailchimp tab of the plugin. After user fills out the email field in calendar then it will be registered to the mailchimp's list instantly.
+Yes. You can enter your MailChimp API Key and Unique List ID in mailchimp tab of the plugin. After user fills out the email field in calendar then it will be registered to the mailchimp's list instantly.
 
-= Can I translate/rewrite the wordings of this plugin ? =
+#### Can I translate/rewrite the wordings of this plugin ?
 
-Yes. There are options in plugin's settings page.
+Yes. There are options in plugin's settings page. You can use Calendar Translation and Email Template Translation tabs for rewriting the words.
 
-= Does this plugin translate ovulation dates according to language chosen? =
+#### Does this plugin translate ovulation dates according to language chosen?
 
-Only in Pro version. It supports 7 languages. They are Danish, Swedish, Norwegian, Finnish, English, Estonian and Spanish.
+Currently it supports 7 languages. They are Danish, Swedish, Norwegian, Finnish, English, Estonian and Spanish.
 
-== Screenshots ==
+## Screenshots
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-1.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-2.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-3.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-4.jpg)
+![alt text](https://github.com/zakirsajib/ovulation-calculator/blob/master/assets/screenshot-5.jpg)
 
-1. General
-2. Calendar Translation
-3. Calendar Month Translation
-4. Calendar Days Translation
-5. Color Scheme
-6. Sidebar shortcode sample #1
-7. Sidebar shortcode sample #2
-8. Page shortcode sample #1
-9. Page shortcode sample #2
 
-== Credits ==
-https://icomoon.io/
-http://calendarscripts.info/ovulation-predictor.html
+## Requirements or developer notes
 
-== Author URL ==
-https://zakirsajib.netlify.com
+Ovulation dates conversation depends on certain php library. This is called IntlDateFormatter (http://php.net/manual/en/class.intldateformatter.php). Your server may not have installed IntlDateFormatter. If not installed then you will receive fatal error. In this case you need to install or ask your hosting company to install IntlDateFormatter php library. If you have access `php.ini` file then you can edit the code. Look for `php_intl.dll`. And remove the comment (;) from `;extension=php_intl.dll` and it should look like this: `extension=php_intl.dll`.
 
-== Author email ==
-zakirsajib@gmail.com
+#### To install in local machine in mac OSX, you can follow this link:
+1. [install-php-intl-extension-os-x](http://budiirawan.com/install-php-intl-extension-os-x)
+2. [international-php-dates-with-intl](https://www.simonholywell.com/post/2015/07/international-php-dates-with-intl)
+
+
+## Credits
+1. [icomoon](https://icomoon.io)
+2. [calendarscripts](http://calendarscripts.info/ovulation-predictor.html)
+
+## Contact
+* [Developer's website](https://zakirsajib.netlify.com)
+* zakirsajib@gmail.com
