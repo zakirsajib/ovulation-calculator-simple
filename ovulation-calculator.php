@@ -11,17 +11,20 @@
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
-if ( ! defined( 'ABSPATH' ) ) { 
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+
+define( 'OC_VERSION', '1.0.0' );
+
 
 add_action( 'plugins_loaded', 'ovulation_calculator_init' );
 
 function ovulation_calculator_init() {
 
 if ( ! class_exists( 'OvulationCalculator' ) ) {
-	class OvulationCalculator {
-		public function __construct() {
+		class OvulationCalculator {
+			public function __construct() {
 				add_action( 'admin_init', array( $this, 'register_settings' ) );
 				add_action( 'admin_enqueue_scripts', array( $this, 'admin_ovulation_calculator_enqueue' ) );
 				add_action( 'admin_menu', array( $this, 'ovulation_calculator' ) );
@@ -31,21 +34,20 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 				add_action( 'init', array( $this, 'ovulation_calculator_shortcodes_init' ) );
 
 				add_action( 'wp_head', array( $this, 'ovulation_calculator_color' ) );
-		}
-		public static function activate() {
+			}
+			public static function activate() {
 				flush_rewrite_rules();
-		} // END public static function activate
+			} // END public static function activate
 
-        public static function deactivate() {
-            	$option_name = 'ovulationcalculator-group';
-	        	delete_option( $option_name );
-	        	delete_site_option( $option_name );
-            	flush_rewrite_rules();
-        } // END public static function deactivate
-        
-        
-        public function ovulation_calculator_color() {
-			$options = get_option( 'ovulationcalculator-group' ); ?>
+			public static function deactivate() {
+				$option_name = 'ovulationcalculator-group';
+				delete_option( $option_name );
+				delete_site_option( $option_name );
+				flush_rewrite_rules();
+			} // END public static function deactivate
+
+			public function ovulation_calculator_color() {
+				$options = get_option( 'ovulationcalculator-group' ); ?>
 			<style>
 				.oc_title, 
 				.oc_subtitle,
@@ -141,41 +143,42 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 					fill: <?php echo esc_attr( $options['oc-ovulation-dates'] ); ?>;
 				}
 			</style>
-			<?php if ( ! empty( $_POST['days'] ) ):
-			if ( ! empty ( $_POST['days'] == 20 ) ): ?>
+				<?php
+			if ( ! empty( $_POST['days'] ) ) :
+					if ( ! empty( $_POST['days'] == 20 ) ) : ?>
+						<style>
+							td.fertileDay-2 span::after,
+							td.fertileDay-2 a.ui-state-default::after,
+							td.fertileDay-6 span::after,
+							td.fertileDay-6 a.ui-state-default::after{
+								color: <?php echo esc_attr( $options['oc-ovulation-dates'] ); ?>;
+							}
+							td.fertileDay-4 span::after,
+							td.fertileDay-4::after,
+							td.fertileDay-4 a.ui-state-default::after{
+								color: <?php echo esc_attr( $options['oc-fertile-tick'] ); ?>!important;
+							}
+						</style>
+								<?php elseif ( ! empty( $_POST['days'] == 21 ) ) : ?>
+						<style>
+							td.fertileDay-3 span::after,
+							td.fertileDay-3 a.ui-state-default::after,
+							td.fertileDay-8 span::after,
+							td.fertileDay-8 a.ui-state-default::after{
+								color: <?php echo esc_attr( $options['oc-ovulation-dates'] ); ?>;
+							}
+							td.fertileDay-4 span::after,
+							td.fertileDay-4::after,
+							td.fertileDay-4 a.ui-state-default::after{
+								color: <?php echo esc_attr( $options['oc-fertile-tick'] ); ?>!important;
+							}
+						</style>
+					<?php endif;
+			endif;
+		}
 
-				<style>
-					td.fertileDay-2 span::after,
-					td.fertileDay-2 a.ui-state-default::after,
-					td.fertileDay-6 span::after,
-					td.fertileDay-6 a.ui-state-default::after{
-						color: <?php echo esc_attr( $options['oc-ovulation-dates'] ); ?>;
-					}
-					td.fertileDay-4 span::after,
-					td.fertileDay-4::after,
-					td.fertileDay-4 a.ui-state-default::after{
-						color: <?php echo esc_attr( $options['oc-fertile-tick'] ); ?>!important;
-					}
-				</style>
-				<?php elseif ( ! empty( $_POST['days'] == 21 ) ): ?>
-				<style>
-					td.fertileDay-3 span::after,
-					td.fertileDay-3 a.ui-state-default::after,
-					td.fertileDay-8 span::after,
-					td.fertileDay-8 a.ui-state-default::after{
-						color: <?php echo esc_attr( $options['oc-ovulation-dates'] ); ?>;
-					}
-					td.fertileDay-4 span::after,
-					td.fertileDay-4::after,
-					td.fertileDay-4 a.ui-state-default::after{
-						color: <?php echo esc_attr( $options['oc-fertile-tick'] ); ?>!important;
-					}
-				</style>
-			<?php endif endif; ?>
-		<?php }
-        
-        # Wordpress internal registration
-		public function register_settings(){
+			# Wordpress internal registration
+			public function register_settings() {
 				# set defaults
 				$options = array(
 					'calculate-ovulation'   => 'Calculate ovulation',
@@ -211,50 +214,89 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 					'oc-fertile-tick'       => '#1A9F1F',
 					'oc-ovulation-dates'    => '#1A9F1F',
 				);
-				add_option( 'ovulationcalculator-group', $options, '', 'yes' ); 
+				add_option( 'ovulationcalculator-group', $options, '', 'yes' );
 				register_setting( 'ovulationcalculator-group', 'ovulationcalculator-group', $options );
-        }
-        
-        // Admin Style and JS
-        public function admin_ovulation_calculator_enqueue() {
+			}
+
+			// Admin Style and JS
+			public function admin_ovulation_calculator_enqueue() {
 				$screen = get_current_screen();
-				if ( $screen->id === 'toplevel_page_ovulation-calculator-menu') {
-								
-					wp_register_style( 'oc-admin-custom', plugins_url( '/include/admin/css/ovulation-calculator-admin.css', __FILE__ ) );
+				if ( $screen->id === 'toplevel_page_ovulation-calculator-menu' ) {
+
+					wp_register_style(
+						'oc-admin-custom',
+						plugins_url( '/include/admin/css/ovulation-calculator-admin.css', __FILE__ ),
+						array(),
+						filemtime( plugins_url( '/include/admin/css/ovulation-calculator-admin.css', __FILE__ ) )
+					);
 					wp_enqueue_style( 'oc-admin-custom' );
-					
+
 					// Tabs
-					wp_register_style( 'oc-admin-tab', plugins_url( '/include/admin/css/tabs.css', __FILE__ ) );
+					wp_register_style( 
+						'oc-admin-tab',
+						plugins_url( '/include/admin/css/tabs.css', __FILE__ ),
+						array(),
+						filemtime( plugins_url( '/include/admin/css/tabs.css', __FILE__ ) )
+					);
 					wp_enqueue_style( 'oc-admin-tab' );
-					wp_register_style( 'oc-admin-tabstyle', plugins_url( '/include/admin/css/tabstyles.css', __FILE__ ) );
+
+					wp_register_style( 
+						'oc-admin-tabstyle', 
+						plugins_url( '/include/admin/css/tabstyles.css', __FILE__ ), 
+						array(), 
+						filemtime( plugins_url( '/include/admin/css/tabstyles.css', __FILE__ ) )
+					);
 					wp_enqueue_style( 'oc-admin-tabstyle' );
-					
-					wp_register_script('oc-modernizr.custom', plugins_url( '/include/admin/js/modernizr.custom.js', __FILE__ ), array('jquery'), false, false );
-					wp_enqueue_script('oc-modernizr.custom');	
-					
-					wp_register_script('oc-cbpFWTabs', plugins_url( '/include/admin/js/cbpFWTabs.js', __FILE__ ), array('jquery'), false, true );
-					wp_enqueue_script('oc-cbpFWTabs');	
-					
-					wp_register_script('oc-custom', plugins_url( '/js/ovulation_calculator.js', __FILE__ ), array('jquery'), false, true );
-					wp_enqueue_script('oc-custom');		   	 
-					
+
+					wp_register_script( 
+						'oc-modernizr.custom', 
+						plugins_url( '/include/admin/js/modernizr.custom.js', __FILE__ ), 
+						array( 'jquery' ), 
+						OC_VERSION, 
+						false 
+					);
+					wp_enqueue_script( 'oc-modernizr.custom' );
+
+					wp_register_script( 
+						'oc-cbpFWTabs', 
+						plugins_url( '/include/admin/js/cbpFWTabs.js', __FILE__ ), 
+						array( 'jquery' ), 
+						OC_VERSION, 
+						true 
+					);
+					wp_enqueue_script( 'oc-cbpFWTabs' );
+
+					wp_register_script( 
+						'oc-custom', 
+						plugins_url( '/js/ovulation_calculator.js', __FILE__ ), 
+						array( 'jquery' ), 
+						OC_VERSION, 
+						true 
+					);
+					wp_enqueue_script( 'oc-custom' );
+
 					wp_enqueue_style( 'wp-color-picker' );
-					wp_enqueue_script( 'wp-color-picker-script', plugins_url('/include/admin/js/wp-color-picker-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
-		 	 }
-	    }   
-	     
-	     
-	    // Front-end Style and JS   
-	    public function ovulation_calculator_enqueue(){ 
-				wp_enqueue_style( 'oc_jquery_ui', plugins_url( '/css/jquery-ui.css', __FILE__ ) );
-				wp_enqueue_style( 'oc_custom_datepicker', plugins_url( '/css/melon.datepicker.css', __FILE__ ) );
-				wp_enqueue_style( 'oc-main', plugins_url( '/css/ovulation-calculator.css', __FILE__ ) );
+					wp_enqueue_script( 
+						'wp-color-picker-script', 
+						plugins_url( '/include/admin/js/wp-color-picker-script.js', __FILE__ ), 
+						array( 'wp-color-picker' ), 
+						OC_VERSION, 
+						true 
+					);
+				 }
+			}
+
+			// Front-end Style and JS
+			public function ovulation_calculator_enqueue() {
+				wp_enqueue_style( 'oc_jquery_ui', plugins_url( '/css/jquery-ui.css', __FILE__ ), array(), filemtime( plugins_url( '/css/jquery-ui.css', __FILE__ ) ), false );
+				wp_enqueue_style( 'oc_custom_datepicker', plugins_url( '/css/melon.datepicker.css', __FILE__ ), array(), filemtime( plugins_url( '/css/melon.datepicker.css', __FILE__ ) ), false );
+				wp_enqueue_style( 'oc-main', plugins_url( '/css/ovulation-calculator.css', __FILE__ ), array(), filemtime( plugins_url( '/css/ovulation-calculator.css', __FILE__ ) ), false );
 				wp_enqueue_script( 'jquery-ui-datepicker' );
-				wp_register_script( 'oc-front', plugins_url( '/js/ovulation_calculator_front.js', __FILE__ ), array('jquery'), false, true );
+				wp_register_script( 'oc-front', plugins_url( '/js/ovulation_calculator_front.js', __FILE__ ), array( 'jquery' ), OC_VERSION, true );
 				wp_enqueue_script( 'oc-front' );
-	    }
-	    
-	    function ovulation_calculator(){
+			}
+
+			public function ovulation_calculator() {
 				$page_title = 'Ovulation Calculator';
 				$menu_title = 'Ovulation Calculator';
 				$capability = 'manage_options';
@@ -262,85 +304,89 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 				$function   = array( $this, 'ovulation_calculator_menu' );
 				$icon_url   = plugins_url( '/include/img/ovulationmini.svg', __FILE__ );
 				$position   = 59;
-				
+
 				add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
-	
-		}
-		function ovulation_calculator_menu() { ?>
+
+			}
+			public function ovulation_calculator_menu() {
+		?>
 			<div class="wrap" id="OvulationCalculator">
-				<h1 class="oc_admin_heading"><img class="ovulation-icon" src="<?php echo plugins_url( '/include/img/ovulation.svg', __FILE__ ); ?>" alt="Ovulation"><?php _esc_attr_e( 'Ovulation Calculator', 'ovulation-calculator' ); ?></h1>
-				<?php $this->show_navigation(); ?>
+				<h1 class="oc_admin_heading"><img class="ovulation-icon" src="<?php echo esc_attr( plugins_url( '/include/img/ovulation.svg', __FILE__ ) ); ?>" alt="Ovulation"><?php _esc_attr_e( 'Ovulation Calculator', 'ovulation-calculator' ); ?></h1>
+					<?php $this->show_navigation(); ?>
 			</div>
-		<?php }
-			
-		public function show_navigation(){
+				<?php
+		}
+
+			public function show_navigation() {
 				$tabs = array(
-					'first'   => __( 'General', 'ovulation-calculator' ), 
+					'first'   => __( 'General', 'ovulation-calculator' ),
 					'second'  => __( 'Calendar Translation', 'ovulation-calculator' ),
 					'third'  => __( 'Calendar Month Translation', 'ovulation-calculator' ),
 					'fourth'  => __( 'Calendar Days Translation', 'ovulation-calculator' ),
-					'fifth'  => __( 'Color Scheme', 'ovulation-calculator' )
+					'fifth'  => __( 'Color Scheme', 'ovulation-calculator' ),
 				);
 				echo '<div class="tabs tabs-style-topline" id="tabs">';
 					$html = '<nav>';
 					$html .= '<ul>';
-					foreach( $tabs as $tab => $name ) {
-						$html .= '<li><a href="#' . $tab . '" class="icon icon-'.$tab.'"><span>' . $name . '</span></li></a>';
+					foreach ( $tabs as $tab => $name ) {
+					$html .= '<li><a href="#' . $tab . '" class="icon icon-' . $tab . '"><span>' . $name . '</span></li></a>';
 					}
 					$html .= '</ul>';
 					$html .= '</nav>';
-					echo $html;
+					echo esc_attr( $html );
 					$this->show_navigation_contents();
 				echo '</div>';
-		}
-		public function show_navigation_contents() { ?>
+			}
+			public function show_navigation_contents() {
+		?>
 			<form method="post" id="ovulationcalculator" action="options.php">
-			   	<?php settings_fields( 'ovulationcalculator-group' ); ?>
-			   	<?php do_settings_sections( 'ovulationcalculator-group' ); ?>
-			   	<?php settings_errors(); ?>
-			   	<?php $options = get_option( 'ovulationcalculator-group' ); ?>
-			   	
-			   	<div class="content-wrap">
-				   	<div class="loader"></div>
-				   	<section id="first"> 
-					   <?php include( plugin_dir_path( __FILE__ ) . 'include/admin/mailchimp.php' ); ?>
+					<?php settings_fields( 'ovulationcalculator-group' ); ?>
+					<?php do_settings_sections( 'ovulationcalculator-group' ); ?>
+					<?php settings_errors(); ?>
+					<?php $options = get_option( 'ovulationcalculator-group' ); ?>
+				
+				   <div class="content-wrap">
+					   <div class="loader"></div>
+					   <section id="first"> 
+						   <?php include( plugin_dir_path( __FILE__ ) . 'include/admin/mailchimp.php' ); ?>
 					</section>
 					<section id="second">
-						<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/translation.php' ); ?>
+							<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/translation.php' ); ?>
 					</section>
 					<section id="third">
-						<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/calendarmonth.php' ); ?>
+							<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/calendarmonth.php' ); ?>
 					</section>
 					<section id="fourth">
-						<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/calendardays.php' ); ?>
+							<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/calendardays.php' ); ?>
 					</section>
 					<section id="fifth">
-						<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/color.php' ); ?>
+							<?php include( plugin_dir_path( __FILE__ ) . 'include/admin/color.php' ); ?>
 					</section>
-			   	</div>
-			   	
-			   	<p class="submit"><input type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'ovulation-calculator' ); ?>" /></p>
+				   </div>
+				
+				   <p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'ovulation-calculator' ); ?>" /></p>
 			</form>
 		
 			
-		<?php }	// Ovulation Calculator Shortcode
-		public function ovulation_calculator_shortcodes_init() {
-		    public function ovulation_calculator_shortcode( $atts = [], $content = null ) {
-		        	// do something to $content
+				<?php
+		} // Ovulation Calculator Shortcode
+			public function ovulation_calculator_shortcodes_init() {
+				function ovulation_calculator_shortcode( $atts = array(), $content = null ) {
+					// do something to $content
 					ob_start();
 					include( plugin_dir_path( __FILE__ ) . 'include/oc-shortcode.php' );
 					$output = ob_get_clean();
-		        	// always return
-		        return $output;
-		    }
-		    	add_shortcode( 'ovulationcalculator', 'ovulation_calculator_shortcode' );
-		}
-		
-	}// end class
+					// always return
+					return $output;
+				}
+				add_shortcode( 'ovulationcalculator', 'ovulation_calculator_shortcode' );
+			}
+
+			}// end class
 }// end if
 
 	# Object Creation here: Important
-	if ( class_exists( 'OvulationCalculator' ) ){	
+	if ( class_exists( 'OvulationCalculator' ) ) {
 		// Installation and uninstallation hooks
 		register_activation_hook( __FILE__, array( 'WP_Plugin_Template', 'activate' ) );
 		register_deactivation_hook( __FILE__, array( 'WP_Plugin_Template', 'deactivate' ) );

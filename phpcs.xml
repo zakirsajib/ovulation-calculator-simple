@@ -15,6 +15,7 @@
 		<exclude name="Squiz.Commenting" />
 		<exclude name="Generic.Commenting.DocComment.MissingShort" />
 		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace" />
 		<exclude name="WordPress.WP.GlobalVariablesOverride" />
 
 		<!-- Enable these rules right away -->
