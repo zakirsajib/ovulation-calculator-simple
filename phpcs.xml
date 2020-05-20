@@ -2,11 +2,7 @@
 <ruleset name="Ovulation Calculator">
 	<description>Ovulation Calculator rules for PHP_CodeSniffer</description>
 
-	<exclude-pattern>tests/*</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
-	<exclude-pattern>node_modules/*</exclude-pattern>
-	<exclude-pattern>deprecated/*</exclude-pattern>
-	<exclude-pattern>bin/*</exclude-pattern>
 
 	<arg name="extensions" value="php" />
 	<arg value="nsp" />
@@ -18,6 +14,7 @@
 		<exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd" />
 		<exclude name="Squiz.Commenting" />
 		<exclude name="Generic.Commenting.DocComment.MissingShort" />
+		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
 		<exclude name="WordPress.WP.GlobalVariablesOverride" />
 
 		<!-- Enable these rules right away -->
@@ -25,7 +22,7 @@
 		<exclude name="WordPress.PHP.DontExtract.extract_extract" />
 		<exclude name="WordPress.Security.NonceVerification.Missing" />
 
-		<!-- These give issues with the current code base. -->
+		<!-- These give issues with the current code base. -->		
 		<exclude name="WordPress.Files.FileName.UnderscoresNotAllowed" />
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
