@@ -333,7 +333,7 @@ if (!class_exists("OvulationCalculator")){
 		    function ovulation_calculator_shortcode($atts = [], $content = null){
 		        // do something to $content
 				ob_start();
-				include( plugin_dir_path( __FILE__ ) . 'include/oc_shortcode.php');
+				include( plugin_dir_path( __FILE__ ) . 'include/oc-shortcode.php');
 				$output = ob_get_clean();
 		        // always return
 		        return $output;
