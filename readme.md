@@ -1,3 +1,5 @@
+![Inspections](https://github.com/zakirsajib/ovulation-calculator-simple/workflows/Inspections/badge.svg)
+
 # Ovulation Calculator
 * Contributors: zakirstage
 * Tags: ovulation
@@ -69,3 +71,6 @@ Ovulation dates conversation depends on certain php library. This is called Intl
 ## Contact
 * [Developer's website](https://zakirsajib.netlify.com)
 * zakirsajib@gmail.com
+
+
+![Inspections](https://github.com/zakirsajib/ovulation-calculator-simple/workflows/Inspections/badge.svg)
