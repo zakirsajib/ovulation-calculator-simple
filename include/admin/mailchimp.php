@@ -2,7 +2,7 @@
 <table class="form-table">
 	<tbody>
 		<tr valign="top">
-		<th scope="row"><?php _esc_attr_e( 'Ovulation Calculator Shortcode', 'ovulationcalculator-group' ); ?></th>
+		<th scope="row"><?php esc_attr_e( 'Ovulation Calculator Shortcode', 'ovulationcalculator-group' ); ?></th>
 		<td>
 			<input 
 				type="text" 

@@ -313,7 +313,7 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 			public function ovulation_calculator_menu() {
 		?>
 			<div class="wrap" id="OvulationCalculator">
-				<h1 class="oc_admin_heading"><img class="ovulation-icon" src="<?php echo esc_attr( plugins_url( '/include/img/ovulation.svg', __FILE__ ) ); ?>" alt="Ovulation"><?php _esc_attr_e( 'Ovulation Calculator', 'ovulation-calculator' ); ?></h1>
+				<h1 class="oc_admin_heading"><img class="ovulation-icon" src="<?php echo esc_attr( plugins_url( '/include/img/ovulation.svg', __FILE__ ) ); ?>" alt="Ovulation"><?php esc_attr_e( 'Ovulation Calculator', 'ovulation-calculator' ); ?></h1>
 					<?php $this->show_navigation(); ?>
 			</div>
 				<?php
