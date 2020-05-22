@@ -145,7 +145,8 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 			</style>
 				<?php
 			if ( ! empty( $_POST['days'] ) ) :
-					if ( ! empty( $_POST['days'] == 20 ) ) : ?>
+					if ( ! empty( $_POST['days'] == 20 ) ) : 
+					?>
 						<style>
 							td.fertileDay-2 span::after,
 							td.fertileDay-2 a.ui-state-default::after,
@@ -173,7 +174,8 @@ if ( ! class_exists( 'OvulationCalculator' ) ) {
 								color: <?php echo esc_attr( $options['oc-fertile-tick'] ); ?>!important;
 							}
 						</style>
-					<?php endif;
+									<?php 
+									endif;
 			endif;
 		}
 

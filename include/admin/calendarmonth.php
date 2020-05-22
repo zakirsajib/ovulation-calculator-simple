@@ -19,7 +19,7 @@
 			<input 
 				type="text" 
 				name="ovulationcalculator-group[oc-feb]" 
-				value="<?php echo ( ! empty( $options['oc-feb'] ) ) ? esc_attr( $options['oc-feb'] ) : 'February' ; ?>" 
+				value="<?php echo ( ! empty( $options['oc-feb'] ) ) ? esc_attr( $options['oc-feb'] ) : 'February'; ?>" 
 				class="regular-text"
 			/>
 		</td>

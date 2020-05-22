@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <ruleset name="Ovulation Calculator">
 	<description>Ovulation Calculator rules for PHP_CodeSniffer</description>
-
 	<exclude-pattern>vendor/*</exclude-pattern>
-
 	<arg name="extensions" value="php" />
 	<arg value="nsp" />
 
@@ -17,6 +15,8 @@
 		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace" />
 		<exclude name="WordPress.WP.GlobalVariablesOverride" />
+		<exclude name="WordPress.WP.I18n.NoEmptyStrings" />
+		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
 
 		<!-- Enable these rules right away -->
 		<exclude name="WordPress.Functions.DontExtract.extract_extract" />
