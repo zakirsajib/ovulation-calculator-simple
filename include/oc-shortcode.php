@@ -73,8 +73,8 @@ if ( ! function_exists( 'Ovulation_Calculator_Check_Available_date' ) ) :
 			$(function ($) {
 			$(document).ready(function() {	  
 				
-				var fertileDays = <?php echo '["' . implode( '", "', esc_attr( $result ) ) . '"]'; ?>;
-				var periodDays = <?php echo '["' . implode( '", "', esc_attr( $period_result ) ) . '"]'; ?>;
+				var fertileDays = <?php echo '["' . implode( '", "', $result ) . '"]'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+				var periodDays = <?php echo '["' . implode( '", "', $period_result ) . '"]'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
 				
 				var monthOne = "<?php echo esc_attr( $options['oc-january'] ); ?>";
 				var monthTwo = "<?php echo esc_attr( $options['oc-feb'] ); ?>";
@@ -96,6 +96,8 @@ if ( ! function_exists( 'Ovulation_Calculator_Check_Available_date' ) ) :
 				var dayFive = "<?php echo esc_attr( $options['oc-fri'] ); ?>";
 				var daySix = "<?php echo esc_attr( $options['oc-sat'] ); ?>";
 				var daySeven = "<?php echo esc_attr( $options['oc-sun'] ); ?>";
+
+				$.datepicker.setDefaults( $.datepicker.regional[ "" ] );
 								
 				$('#datepicker').datepicker({
 					
@@ -124,9 +126,9 @@ if ( ! function_exists( 'Ovulation_Calculator_Check_Available_date' ) ) :
 		<?php
 } endif;// Function ends here
 
-if ( ! empty( $_POST['calculator_ok'] ) ) :
+if ( ! empty( $_POST['calculator_ok'] ) && ! empty( $_POST['something'] ) ) :
 
-	$fulldate = sanitize_text_field( isset( $_POST['something'] ) );
+	$fulldate = sanitize_text_field( wp_unslash( $_POST['something'] ) );
 
 	$dateparts = explode( '/', $fulldate );
 
@@ -162,11 +164,11 @@ if ( ! empty( $_POST['calculator_ok'] ) ) :
 	<div class="calculator_table">
 		<div class="calendar-area">
 			<?php
-			if ( ! empty( $options['oc-dates'] ) ) :
-				printf( __( '<h2>%s</h2>', 'ovulation-calculator' ), esc_attr( $options['oc-dates'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if ( $options['oc-dates'] ) :
+				echo '<h2>' . esc_attr( $options['oc-dates'] ) . '</h2>';
 			endif;
-			if ( ! empty( $options['oc-next-month-results'] ) ) :
-				printf( __( '<p>%s</p>', 'ovulation-calculator' ), esc_attr( $options['oc-next-month-results'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if ( $options['oc-next-month-results'] ) :
+				echo '<p>' . esc_attr( $options['oc-next-month-results'] ) . '</p>';
 			endif;
 
 			Ovulation_Calculator_Check_Available_date( $firstday, $next_period, $selected_period_date );
@@ -202,18 +204,45 @@ if ( ! empty( $_POST['calculator_ok'] ) ) :
 	
 			<div id="datepicker" class="ll-skin-melon"></div>
 			<div class="fertile" style="padding-top: 1rem;">
-				<img class="expected-ovulation" src="<?php echo plugins_url( '/img/circle2.svg', __FILE__ ); ?>" alt="Days of expected ovulation">&nbsp;&nbsp;&nbsp;<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['oc-expected-ovulation'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<img 
+					class="expected-ovulation" 
+					src="<?php echo esc_url( plugins_url( '/img/circle2.svg', __FILE__ ) ); ?>" 
+					alt="Days of expected ovulation"
+				>
+					&nbsp;&nbsp;&nbsp;<?php echo esc_attr( $options['oc-expected-ovulation'] ); ?>
 			</div>
 			<div class="calculateagain">
 				<div class="fertile">
-					<img class="fertileTick" src="<?php echo plugins_url( '/img/checkmark.svg', __FILE__ ); ?>" alt="ovulation fertile">&nbsp;&nbsp;&nbsp;<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['oc-fertile'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<img 
+						class="fertileTick" 
+						src="<?php echo esc_url( plugins_url( '/img/checkmark.svg', __FILE__ ) ); ?>" 
+						alt="ovulation fertile"
+					>
+						&nbsp;&nbsp;&nbsp;<?php echo esc_attr( $options['oc-fertile'] ); ?>
 				</div>
-				<div class="calculateagainbtn" onclick="window.location='http://<?php echo isset( $_SERVER['HTTP_HOST'] ); ?><?php echo isset( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>'">
-					<span class="icon-calendar3"></span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['oc-change-date'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" onclick="window.location='http://<?php echo isset( $_SERVER['HTTP_HOST'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><?php echo isset( $_SERVER['REQUEST_URI'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>'">
+				
+				<?php 
+				
+				if ( ! empty( $_SERVER['HTTP_HOST'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) :             
+					$http_post = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+					$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ); 
+				?>
+				
+				<div 
+					class="calculateagainbtn" 
+					onclick="window.location='http://<?php echo esc_attr( $http_post ); ?><?php echo esc_attr( $request_uri ); ?>'"
+				>
+					<span class="icon-calendar3"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<input 
+						type="button" 
+						value="<?php echo esc_attr( $options['oc-change-date'] ); ?>" onclick="window.location='http://<?php echo esc_attr( $http_post ); ?><?php echo esc_attr( $request_uri ); ?>'"
+					>
 				</div>
+				<?php endif; ?>
+
 			</div>
 			<div class="fertile">
-				<div class="period-indicator"></div>&nbsp;&nbsp;&nbsp;<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['oc-start-ovulation'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				<div class="period-indicator"></div>&nbsp;&nbsp;&nbsp;<?php echo esc_attr( $options['oc-start-ovulation'] ); ?>
 			</div>
 		</div>
 	</div>
@@ -272,21 +301,30 @@ if ( ! empty( $_POST['calculator_ok'] ) ) :
 		<form method="post" id="ovulationCalculatorForm" autocomplete="off">
 			<?php
 			if ( ! empty( $options['calculate-ovulation'] ) ) :
-				printf( __( ' <h2> %s </h2> ', 'ovulation-calculator' ), esc_attr( $options['calculate-ovulation'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				//printf( __( ' <h2> %s </h2> ', 'ovulation-calculator' ), $options['calculate-ovulation'] );
+				echo '<h2>' . esc_attr( $options['calculate-ovulation'] ) . '</h2>';
 			endif;
 			if ( ! empty( $options['first-day-last-period'] ) ) :
-				printf( __( ' <p> %s </p> ', 'ovulation-calculator' ), esc_attr( $options['first-day-last-period'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				//printf( __( ' <p>%s</p> ', 'ovulation-calculator' ), $options['first-day-last-period'] );
+				echo '<p>' . esc_attr( $options['first-day-last-period'] ) . '</p>';
 			endif;
 			?>
 			<span class="icon-calendar2"></span>
 			<?php if ( ! empty( $options['select-date'] ) ) : ?>
-			<input type="text" name="something" placeholder="<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['select-date'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>..." id="calendarInput" readonly/>
+				<input 
+					type="text" 
+					name="something" 
+					placeholder="<?php printf( esc_attr( __( '%s', 'ovulation-calculator' ) ), esc_attr( $options['select-date'] ) ); ?>..." 
+					id="calendarInput" 
+					readonly
+				/>
 			<?php endif; ?>
 			<div id="calendar" class="ll-skin-melon"></div>
 			
 			<?php
 			if ( ! empty( $options['length-cycle'] ) ) :
-				printf( __( ' <p> %s </p> ', 'ovulation-calculator' ), esc_attr( $options['length-cycle'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				//printf( esc_attr( __( '<p>%s</p>', 'ovulation-calculator' ) ), esc_attr( $options['length-cycle'] ) );
+				echo '<p>' . esc_attr( $options['length-cycle'] ) . '</p>'; 
 			endif
 			?>
 			<select name="days">
@@ -304,7 +342,12 @@ if ( ! empty( $_POST['calculator_ok'] ) ) :
 			<span class="icon-angle-right"></span>
 			<div class="submit-btn">
 				<?php if ( ! empty( $options['oc-submit'] ) ) : ?>
-					<input type="submit" name="calculator_ok" id="calculatorOk" value="<?php printf( __( '%s', 'ovulation-calculator' ), esc_attr( $options['oc-submit'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
+					<input 
+						type="submit" 
+						name="calculator_ok" 
+						id="calculatorOk" 
+						value="<?php printf( esc_attr( __( '%s', 'ovulation-calculator' ) ), esc_attr( $options['oc-submit'] ) ); ?>"
+					>
 				<?php endif; ?>
 			</div>
 		</form>
