@@ -4,7 +4,7 @@
 * Contributors: zakirstage
 * Tags: ovulation
 * Requires at least: 4.1
-* Tested up to: 5.0.3
+* Tested up to: 5.4.1
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
